@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Snake Water Gun</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 50px;
+      background-color: #f0f0f0;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    .buttons {
+      margin: 20px;
+    }
+
+    button {
+      font-size: 20px;
+      padding: 10px 20px;
+      margin: 5px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #result-box {
+      margin-top: 30px;
+      padding: 20px;
+      background-color: white;
+      border-radius: 8px;
+      display: inline-block;
+      min-width: 300px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    #result {
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .win  { color: green; }
+    .lose { color: red; }
+    .draw { color: orange; }
+
+    #score {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🐍 Snake Water Gun 🔫</h1>
+  <p>Choose your weapon:</p>
+
+  <div class="buttons">
+    <button onclick="play('s')">🐍 Snake</button>
+    <button onclick="play('w')">💧 Water</button>
+    <button onclick="play('g')">🔫 Gun</button>
+  </div>
+
+  <div id="result-box">
+    <p>Make your move!</p>
+  </div>
+
+  <div id="score">
+    Score — You: <span id="you-score">0</span> | Computer: <span id="cpu-score">0</span>
+  </div>
+
+  <script>
+    let youScore = 0;
+    let cpuScore = 0;
+
+    async function play(choice) {
+      const response = await fetch('/play', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ choice: choice })
+      });
+
+      const data = await response.json();
+
+      if (data.result === 'win') youScore++;
+      if (data.result === 'lose') cpuScore++;
+
+      document.getElementById('you-score').textContent = youScore;
+      document.getElementById('cpu-score').textContent = cpuScore;
+
+      const box = document.getElementById('result-box');
+      const msg = data.result === 'win' ? 'You Win! 🎉' :
+                  data.result === 'lose' ? 'You Lose! 😢' : "It's a Draw! 🤝";
+
+      box.innerHTML = `
+        <p>You chose: <b>${data.you}</b></p>
+        <p>Computer chose: <b>${data.computer}</b></p>
+        <p id="result" class="${data.result}">${msg}</p>
+      `;
+    }
+  </script>
+
+</body>
+</html>
