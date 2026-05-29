@@ -1,37 +1,54 @@
-🐍 Snake Water Gun Game
+# 🐍 Snake Water Gun Game
+
 Built this to revise Python basics and how Flask works as a backend.
+
 Simple game — Snake beats Water, Water beats Gun, Gun beats Snake.
 
-📁 Structure
+---
+
+## 📁 Structure
+
+```
 SnakeWaterGun_Game/
-├── game.py       # game logic
-├── app.py        # flask server
-└── index.html    # ui
+├── game.py      # game logic
+├── app.py       # flask server
+└── index.html   # ui
+```
 
-▶️ Run
-bashpip install flask
+---
+
+## ▶️ Run
+
+```bash
+pip install flask
 python app.py
-# open http://localhost:5000
+```
 
-🔁 What I Revised
-Python
+Then open **http://localhost:5000**
 
-Dictionaries — mapping user input ("s", "w", "g") to values and back
-Functions — wrapping the game logic so Flask can call it cleanly
-random.choice() — for computer's move
-if/elif chains — win/lose/draw conditions
+---
 
-Flask
+## 🔁 What I Revised
 
-@app.route() — defining URL endpoints
-request.get_json() — reading data sent from the browser
-jsonify() — sending data back as JSON
-send_from_directory() — serving the HTML file
+### Python
 
-JS (frontend side)
+- **Dictionaries** — mapping user input (`"s"`, `"w"`, `"g"`) to values and back
+- **Functions** — wrapping the game logic so Flask can call it cleanly
+- **random.choice()** — for the computer's move
+- **if/elif chains** — win/lose/draw conditions
 
-fetch() with POST — sending the player's choice to Flask
-Reading the JSON response and updating the DOM
+### Flask
 
+- `@app.route()` — defining URL endpoints
+- `request.get_json()` — reading data sent from the browser
+- `jsonify()` — sending data back as JSON
+- `send_from_directory()` — serving the HTML file
 
-Made by @harsh2005-singh
+### JS (frontend)
+
+- `fetch()` with POST — sending the player's choice to Flask
+- Reading the JSON response and updating the DOM
+
+---
+
+Made by [@harsh2005-singh](https://github.com/harsh2005-singh)
